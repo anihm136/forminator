@@ -1,0 +1,77 @@
+{
+    "$id": "form",
+    "$schema": "http://json-schema.org/draft-07/schema",
+
+    "definitions": {
+        "baseQuestion": {
+            "type": "object",
+            "properties": {
+                "question": {
+                    "type": "string"
+                }
+            },
+            "required": ["question"]
+        },
+        "shortAnswerQuestion": {
+            "type": "object",
+            "allOf": [
+                { "$ref": "#/definitions/baseQuestion" },
+                {
+                    "properties": {
+                        "type": {
+                            "const": 1
+                        }
+                    }
+                }
+            ],
+            "required": ["type"]
+        },
+        "multiChoiceOption": {
+            "type": "string"
+        },
+        "multiChoiceQuestion": {
+            "type": "object",
+            "allOf": [
+                { "$ref": "#/definitions/baseQuestion" },
+                {
+                    "properties": {
+                        "type": {
+                            "const": 2
+                        },
+                        "choices": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/multiChoiceOption"
+                            },
+                            "minItems": 2
+                        },
+                        "correct": {
+                            "type": "integer",
+                            "minimum": -1
+                        }
+                    }
+                }
+            ],
+            "required": ["type", "choices"]
+        }
+    },
+
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "elements": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "oneOf": [
+                    { "$ref": "#/definitions/multiChoiceQuestion" },
+                    { "$ref": "#/definitions/shortAnswerQuestion" }
+                ]
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": ["title", "elements"]
+}
