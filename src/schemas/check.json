@@ -1,0 +1,18 @@
+{
+    "title": "New form",
+    "elements": [
+        {
+            "question": "Question 1",
+            "type": 2,
+            "choices": ["option 1", "option 2"]
+        },
+        {
+            "question": "Question 2",
+            "type": 1
+        },
+        {
+            "question": "Question 3",
+            "type": 1
+        }
+    ]
+}

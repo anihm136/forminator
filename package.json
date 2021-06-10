@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc -p .",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
+    "format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/mongodb": "^3.6.17",
     "ajv": "^8.6.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.13"
@@ -20,15 +22,20 @@
   "devDependencies": {
     "@types/express": "^4.17.12",
     "@types/node": "^15.6.1",
-    "eslint": "^7.12.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint": "^7.28.0",
     "eslint-config-prettier": "^6.14.0",
-    "eslint-config-standard": "^15.0.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
     "nodemon": "^2.0.7",
+    "prettier": "^2.3.1",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint-fix"
+    }
   }
 }
