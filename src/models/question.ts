@@ -4,13 +4,15 @@ interface MCQType {
   question: string
   type: number
   choices: Array<string>
-  correct?: number
+  correct: number
 }
 
 interface SAQType {
   question: string
   type: number
 }
+
+type QuestionType = MCQType | SAQType
 
 const multiChoiceQuestionSchema = new Schema({
   _id: Number,
@@ -47,4 +49,4 @@ const shortAnswerQuestionSchema = new Schema({
 const MCQ = model('MCQ', multiChoiceQuestionSchema)
 const SAQ = model('SAQ', shortAnswerQuestionSchema)
 
-export { MCQ, SAQ, MCQType, SAQType }
+export { MCQ, SAQ, MCQType, SAQType, QuestionType }

@@ -1,10 +1,11 @@
 import { Schema, model } from 'mongoose'
 import { ObjectId } from 'mongodb'
+import { QuestionType } from './question'
 
 interface FormType {
   _id: ObjectId
   title: string
-  elements: Array<any>
+  elements: Array<QuestionType>
 }
 
 const formSchema = new Schema(
