@@ -1,31 +1,17 @@
-import express, { Application, Request, NextFunction } from 'express'
-import { CustomResponse } from './types/response'
-import createForm from './handlers/create'
-import { writeResponse } from './middleware/response'
 import mongoose from 'mongoose'
+import app from './app'
+import config from './config'
 
-const app: Application = express()
-app.set('env', process.env.RUN_ENV || 'development')
+const db_user = config.db_user
+const db_pass = config.db_pass
+const db_name = config.db_name
+const base_url = process.env.DB_BASE || 'localhost'
+const db_url = `mongodb+srv://${db_user}:${db_pass}@${base_url}/${db_name}`
 
-// Middleware
-app.use(express.json())
+console.log(db_url)
 
-app.post('/form/create', createForm)
-app.get('/form/:formToken', (req: Request, res: CustomResponse, next: NextFunction) => {
-  res.custom_data.message = `Returns the form with token ${req.params.formToken}`
-  next()
-})
-
-app.use(writeResponse)
-
-const pwd = process.env.DB_PASS
-const user = process.env.DB_USER
-const dbName = process.env.DB_NAME
 mongoose
-  .connect(
-    `mongodb+srv://${user}:${pwd}@forminator-data.wvxlh.mongodb.net/${dbName}?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(db_url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(process.env.PORT || 3000, () => {
       console.log(process.env.PORT)
