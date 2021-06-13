@@ -1,26 +1,8 @@
 import { Request, NextFunction } from 'express'
 import { CustomResponse } from '../types/response'
 import { Form, FormType } from '../models/form'
-import { MCQ, SAQ } from '../models/question'
 import { validator } from '../schemas'
-
-const runtimeValidateForm = (form: FormType) => {
-  for (const [idx, question] of form.elements.entries()) {
-    if (question.type == 2 && question.correct >= question.choices.length) {
-      return false
-    }
-    switch (question.type) {
-      case 1:
-        form.elements[idx] = new SAQ(question)
-        break
-      case 2:
-        form.elements[idx] = new MCQ(question)
-        break
-    }
-  }
-
-  return true
-}
+import { runtimeValidateForm } from '../utils'
 
 const createForm = async (req: Request, res: CustomResponse, next: NextFunction): Promise<void> => {
   const validateForm = validator.getSchema('form')
@@ -31,7 +13,7 @@ const createForm = async (req: Request, res: CustomResponse, next: NextFunction)
   }
 
   const response = {
-    code: 200,
+    code: 201,
     message: 'Form created',
     form_id: ''
   }
@@ -56,3 +38,4 @@ const createForm = async (req: Request, res: CustomResponse, next: NextFunction)
 }
 
 export default createForm
+export { createForm, runtimeValidateForm }
