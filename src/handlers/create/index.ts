@@ -17,6 +17,7 @@ const createForm = async (req: Request, res: CustomResponse, next: NextFunction)
     response.message = 'Form invalid'
     res.custom_data = response
     next()
+    return
   }
 
   const form = new Form(req.body)
@@ -25,6 +26,7 @@ const createForm = async (req: Request, res: CustomResponse, next: NextFunction)
     response.message = 'Form invalid'
     res.custom_data = response
     next()
+    return
   }
 
   for (const [idx, question] of form.elements.entries()) {
