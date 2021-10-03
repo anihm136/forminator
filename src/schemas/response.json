@@ -1,0 +1,27 @@
+{
+    "$id": "response",
+    "$schema": "http://json-schema.org/draft-07/schema",
+
+    "type": "object",
+    "properties": {
+        "answers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "question_id": {
+                        "type": "integer"
+                    },
+                    "answer": {
+                        "oneOf": [
+                            { "type": "integer" },
+                            { "type": "string" }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": ["answers"]
+}
