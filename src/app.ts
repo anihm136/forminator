@@ -1,7 +1,7 @@
-import express, { Application, Request, NextFunction } from 'express'
-import { CustomResponse } from './types/response'
+import express, { Application } from 'express'
 import createForm from './handlers/form/create'
 import respondToForm from './handlers/response/create'
+import readForm from './handlers/form/read'
 import { writeResponse } from './middleware/response'
 
 const app: Application = express()
@@ -11,10 +11,7 @@ app.set('env', process.env.RUN_ENV || 'development')
 app.use(express.json())
 
 app.post('/form/create', createForm)
-app.get('/form/:formToken', (req: Request, res: CustomResponse, next: NextFunction) => {
-  res.custom_data.message = `Returns the form with token ${req.params.formToken}`
-  next()
-})
+app.get('/form/:formToken', readForm)
 
 app.post('/response/:formToken', respondToForm)
 
