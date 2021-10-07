@@ -1,5 +1,5 @@
-import { validator } from '../../schemas'
-import { ResponseType } from '../../models/response'
+import { validator } from '../../../schemas'
+import { ResponseType } from '../../../models/response'
 
 function schemaValidateForm(body: ResponseType): boolean {
   const validateForm = validator.getSchema('response')

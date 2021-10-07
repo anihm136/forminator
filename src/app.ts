@@ -1,7 +1,7 @@
 import express, { Application, Request, NextFunction } from 'express'
 import { CustomResponse } from './types/response'
-import createForm from './handlers/create'
-import respondToForm from './handlers/respond'
+import createForm from './handlers/form/create'
+import respondToForm from './handlers/response/create'
 import { writeResponse } from './middleware/response'
 
 const app: Application = express()

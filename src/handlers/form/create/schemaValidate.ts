@@ -1,5 +1,5 @@
-import { validator } from '../../schemas'
-import { FormType } from '../../models/form'
+import { validator } from '../../../schemas'
+import { FormType } from '../../../models/form'
 
 function schemaValidateForm(body: FormType): boolean {
   const validateForm = validator.getSchema('form')

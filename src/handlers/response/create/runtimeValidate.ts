@@ -1,6 +1,6 @@
-import { FormType } from '../../models/form'
-import { ResponseType } from '../../models/response'
-import { MCQType } from '../../models/question'
+import { FormType } from '../../../models/form'
+import { ResponseType } from '../../../models/response'
+import { MCQType } from '../../../models/question'
 
 function runtimeValidateResponse(response: ResponseType, form: FormType): boolean {
   for (const responseItem of response.answers) {

@@ -1,4 +1,4 @@
-import { FormType } from '../../models/form'
+import { FormType } from '../../../models/form'
 
 function runtimeValidateForm(form: FormType): boolean {
   for (const question of form.elements) {

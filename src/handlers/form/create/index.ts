@@ -1,7 +1,7 @@
 import { Request, NextFunction } from 'express'
-import { MCQ, SAQ } from '../../models/question'
-import { CustomResponse } from '../../types/response'
-import { Form, FormType } from '../../models/form'
+import { MCQ, SAQ } from '../../../models/question'
+import { CustomResponse } from '../../../types/response'
+import { Form, FormType } from '../../../models/form'
 import runtimeValidateForm from './runtimeValidate'
 import schemaValidateForm from './schemaValidate'
 
